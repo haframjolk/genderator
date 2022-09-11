@@ -26,6 +26,9 @@ const images = [
     "img/12.png"
 ];
 
+// Words to use
+const words = ["kosmós", "kaos", "alsæla", "já", "nei", "úff", "???", "!!!", "UwU", "aha!", "öööö", "heimurinn", "leið", "farartæki", "algrími", "alkuldi", "varmi", "dagbók", "augu", "nef", "munnur", "líkami", "fyndið", "sniðugt", "kort", "landslag", "blóm", "líf", "dauði", "gleði", "sorg", "OwO", "haaaaa", "þvættingur", "skilningur", "hraði", "kósí", "list", "ljóð", "fjöll", "sjór", "lækur", "skýin", "sól", "tungl", "fluga", "snigill", "manneskja", "einmitt", "taugar", "rætur", "flækja", "lauf", "skógur", "tígull", "stjarna", "hendur", "stjórn", "stjórnleysi", "jafnvægi", "óskilamunur", "fylgja", "skuggi", "ljós", "eitt", "pláneta", "heimur", "vídd", "tími", "lengd", "rými", "regnbogi", "veður", "hreinsun", "engill", "púki", "efni", "tómið", "tölva", "atóm", "stemming", "stuð", "þrumur", "morgun", "texti", "hljóð", "þögn", "læti", "vatn", "loft", "eldur"]
+
 // Width of images displayed in CSS pixels
 const imgWidth = 300;
 
@@ -106,6 +109,8 @@ function showStartScreen() {
  * Generates a gender and displays on the page
  */
 function generateGender() {
+    // TODO: show 2–3 words and 2–3 images to each screen
+
     // Set background color
     genderView.style.backgroundColor = randomChoice(backgroundColors);
     
@@ -116,7 +121,7 @@ function generateGender() {
     genderGraphic.style.top = `${graphicPos.top}px`;
 
     // Set text content and position
-    genderText.textContent = "lorem";
+    genderText.textContent = randomChoice(words);
     let textPos;
     do {
         textPos = generatePosition(imgWidth);
