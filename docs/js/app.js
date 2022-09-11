@@ -47,8 +47,8 @@ const genderWords = document.querySelector("#gender-words").children;
 
 /**
  * Generates a random integer between min and max
- * @param {Number} min Minimum number (inclusive)
- * @param {Number} max Maximum number (exclusive)
+ * @param {number} min Minimum number (inclusive)
+ * @param {number} max Maximum number (exclusive)
  * @returns A random integer in the range [min, max)
  */
 function randInt(min, max) {
@@ -57,7 +57,7 @@ function randInt(min, max) {
 
 /**
  * Returns a random item from the specified array
- * @param {Array} array Array to choose from
+ * @param {any[]} array Array to choose from
  * @returns A random item from array
  */
 function randomChoice(array) {
@@ -66,9 +66,9 @@ function randomChoice(array) {
 
 /**
  * Generates a random position for an object, with the specified margin
- * @param {Number} margin Minimum margin from screen border
- * @param {Number} width Screen width
- * @param {Number} height Screen height
+ * @param {number} margin Minimum margin from screen border
+ * @param {number} width Screen width
+ * @param {number} height Screen height
  * @returns An object with random values for the left and top position of an object
  */
 function generatePosition(margin, width, height) {
