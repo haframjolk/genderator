@@ -105,8 +105,6 @@ function showStartScreen() {
  * Generates a gender and displays on the page
  */
 function generateGender() {
-    // TODO: show 2–3 words and 2–3 images to each screen
-
     // Set background color
     genderView.style.backgroundColor = randomChoice(backgroundColors);
     
@@ -164,10 +162,6 @@ function generateGender() {
         // Increment i for next fraction
         j++;
     }
-    // TODO: add collision detection
-    // do {
-        
-    // } while (checkCollision(graphicPos, textPos, imgWidth));  // TODO: add checks so this doesn't go on forever
 
     // TODO: fix this for multiple graphics
     // Once the graphic has been loaded, hide the start screen
