@@ -12,6 +12,10 @@ body {
     font-family: monospace;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .gender {
     position: absolute;
     top: 0;
@@ -47,8 +51,4 @@ body {
 
 .start-screen__inner {
     text-align: center;
-}
-
-.hidden {
-    visibility: hidden;
 }
