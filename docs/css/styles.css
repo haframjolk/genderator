@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    font-family: 'Roboto Mono', monospace;
+    font-family: "Roboto Mono", monospace;
     pointer-events: none;
 }
 
@@ -43,10 +43,11 @@ body {
     right: 0;
     bottom: 0;
     z-index: 10;
-    background-color: yellow;
+    background-color: #000;
+    color: #fff;
+    font-size: 2em;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 2em;
 }
