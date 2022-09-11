@@ -1,24 +1,39 @@
 "use strict";
 
-const startScreen = document.getElementById("start-screen");
-const genderView = document.getElementById("gender");
-const genderGraphic = document.getElementById("gender-graphic");
-const genderText = document.getElementById("gender-text");
+// Background colors to be used
+const backgroundColors = [
+    "#E40303",
+    "#FF8C00",
+    "#FFED00",
+    "#008026",
+    "#004DFF",
+    "#750787"
+];
+
+// Image source URLs
+const images = [
+    "img/1.png",
+    "img/2.png",
+    "img/3.png",
+    "img/4.png",
+    "img/5.png",
+    "img/6.png",
+    "img/7.png",
+    "img/8.png",
+    "img/9.png",
+    "img/10.png",
+    "img/11.png",
+    "img/12.png"
+];
 
 // Width of images displayed in CSS pixels
 const imgWidth = 300;
 
-// TODO: rainbow colors
-const backgroundColors = [
-    "#FF0000",
-    "#00FF00",
-    "#0000FF"
-];
-const images = [
-    "img/1.png",
-    "img/2.png",
-    "img/3.png"
-];
+// DOM elements
+const startScreen = document.getElementById("start-screen");
+const genderView = document.getElementById("gender");
+const genderGraphic = document.getElementById("gender-graphic");
+const genderText = document.getElementById("gender-text");
 
 /**
  * Generates a random integer between min and max
@@ -63,6 +78,14 @@ function checkCollision(pos1, pos2, size) {
 }
 
 /**
+ * Hides the start screen
+ */
+function hideStartScreen() {
+    startScreen.classList.add("hidden");
+    genderGraphic.removeEventListener("load", hideStartScreen);
+}
+
+/**
  * Generates a gender and displays on the page
  */
 function generateGender() {
@@ -80,12 +103,12 @@ function generateGender() {
     let textPos;
     do {
         textPos = generatePosition(imgWidth);
-    } while (checkCollision(graphicPos, textPos, imgWidth));
+    } while (checkCollision(graphicPos, textPos, imgWidth));  // TODO: add checks so this doesn't go on forever
     genderText.style.left = `${textPos.left}px`;
     genderText.style.top = `${textPos.top}px`;
 
-    // Hide start screen
-    startScreen.classList.add("hidden");
+    // Once the graphic has been loaded, hide the start screen
+    genderGraphic.addEventListener("load", hideStartScreen);
 }
 
 document.addEventListener("keydown", generateGender);
