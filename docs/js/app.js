@@ -38,8 +38,8 @@ const displayTime = 60000;
 // DOM elements
 const startScreen = document.getElementById("start-screen");
 const genderView = document.getElementById("gender");
-const genderGraphic = document.getElementById("gender-graphic");
-const genderText = document.getElementById("gender-text");
+const genderGraphics = document.querySelector("#gender-graphics").children;
+const genderWords = document.querySelector("#gender-words").children;
 
 /**
  * Generates a random integer between min and max
@@ -63,24 +63,15 @@ function randomChoice(array) {
 /**
  * Generates a random position for an object, with the specified margin
  * @param {Number} margin Minimum margin from screen border
+ * @param {Number} width Screen width
+ * @param {Number} height Screen height
  * @returns An object with random values for the left and top position of an object
  */
-function generatePosition(margin) {
+function generatePosition(margin, width, height) {
     return {
-        left: randInt(margin, window.innerWidth - margin),
-        top: randInt(margin, window.innerHeight - margin),
+        left: randInt(margin, width - margin),
+        top: randInt(margin, height - margin),
     }
-}
-
-/**
- * Returns true if object in pos1 collides with object in pos2
- * @param {Object} pos1 Position object with left and top attributes
- * @param {Object} pos2 Position object with left and top attributes
- * @param {Number} size Minimum difference between positions (x and y) required to not collide
- * @returns true if objects collide, false otherwise
- */
-function checkCollision(pos1, pos2, size) {
-    return (Math.abs(pos1.left - pos2.left) < size) && (Math.abs(pos1.top - pos2.top) < size);
 }
 
 /**
@@ -88,7 +79,8 @@ function checkCollision(pos1, pos2, size) {
  */
 function hideStartScreen() {
     // Remove event listener added after pressing button
-    genderGraphic.removeEventListener("load", hideStartScreen);
+    // TODO: fix
+    // genderGraphic.removeEventListener("load", hideStartScreen);
 
     // Hide start screen
     startScreen.classList.add("hidden");
@@ -114,23 +106,69 @@ function generateGender() {
     // Set background color
     genderView.style.backgroundColor = randomChoice(backgroundColors);
     
-    // Set graphic content and position
-    genderGraphic.src = randomChoice(images);
-    const graphicPos = generatePosition(imgWidth);
-    genderGraphic.style.left = `${graphicPos.left}px`;
-    genderGraphic.style.top = `${graphicPos.top}px`;
+    // Graphics
+    const usedGraphics = [];
+    // Iterator
+    let i = 0;
+    for (const genderGraphic of genderGraphics) {
+        // Choose a random graphic that has not been used before in this gender
+        let src;
+        do {
+            src = randomChoice(images);
+        } while (usedGraphics.includes(src));
 
-    // Set text content and position
-    genderText.textContent = randomChoice(words);
-    let textPos;
-    do {
-        textPos = generatePosition(imgWidth);
-    } while (checkCollision(graphicPos, textPos, imgWidth));  // TODO: add checks so this doesn't go on forever
-    genderText.style.left = `${textPos.left}px`;
-    genderText.style.top = `${textPos.top}px`;
+        // Add graphic to usedGraphics to make sure it doesn't appear twice
+        usedGraphics.push(src);
 
+        // Set graphic content
+        genderGraphic.src = src;
+
+        // Set graphic position
+        const screenFraction = Math.floor(window.innerWidth / genderGraphics.length);
+        const graphicPos = generatePosition(imgWidth, screenFraction, window.innerHeight);
+        genderGraphic.style.left = `${graphicPos.left + i * screenFraction}px`;
+        genderGraphic.style.top = `${graphicPos.top}px`;
+
+        // Increment i for next fraction
+        i++;
+    }
+
+    // Words
+    const usedWords = [];
+    // Iterator
+    let j = 0;
+    for (const genderWord of genderWords) {
+        // Choose a random word that has not been used before in this gender
+        let word;
+        do {
+            word = randomChoice(words);
+        } while (usedWords.includes(word));
+
+        // Add word to usedWords to make sure it doesn't appear twice
+        usedWords.push(word);
+
+        // Set word content
+        genderWord.textContent = randomChoice(words);
+
+        // Set word position
+        // TODO: fix words sometimes appearing off-screen
+        const screenFraction = Math.floor(window.innerHeight / genderWords.length);
+        const wordPos = generatePosition(imgWidth, window.innerWidth, screenFraction);
+        genderWord.style.left = `${wordPos.left}px`;
+        genderWord.style.top = `${wordPos.top + j * screenFraction}px`;
+
+        // Increment i for next fraction
+        j++;
+    }
+    // TODO: add collision detection
+    // do {
+        
+    // } while (checkCollision(graphicPos, textPos, imgWidth));  // TODO: add checks so this doesn't go on forever
+
+    // TODO: fix this for multiple graphics
     // Once the graphic has been loaded, hide the start screen
-    genderGraphic.addEventListener("load", hideStartScreen);
+    // genderGraphic.addEventListener("load", hideStartScreen);
+    hideStartScreen();
 
     // Show the start screen if gender has been on screen for specified displayTime
     startScreenTimeout = setTimeout(showStartScreen, displayTime);
