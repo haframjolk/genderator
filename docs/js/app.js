@@ -29,6 +29,9 @@ const images = [
 // Width of images displayed in CSS pixels
 const imgWidth = 300;
 
+// Time to display gender on screen in ms
+const displayTime = 60000;
+
 // DOM elements
 const startScreen = document.getElementById("start-screen");
 const genderView = document.getElementById("gender");
@@ -81,8 +84,22 @@ function checkCollision(pos1, pos2, size) {
  * Hides the start screen
  */
 function hideStartScreen() {
-    startScreen.classList.add("hidden");
+    // Remove event listener added after pressing button
     genderGraphic.removeEventListener("load", hideStartScreen);
+
+    // Hide start screen
+    startScreen.classList.add("hidden");
+}
+
+/**
+ * Shows the start screen
+ */
+function showStartScreen() {
+    // Stop timeout set to show start screen
+    clearTimeout(startScreenTimeout);
+
+    // Show start screen
+    startScreen.classList.remove("hidden");
 }
 
 /**
@@ -109,6 +126,24 @@ function generateGender() {
 
     // Once the graphic has been loaded, hide the start screen
     genderGraphic.addEventListener("load", hideStartScreen);
+
+    // Show the start screen if gender has been on screen for specified displayTime
+    startScreenTimeout = setTimeout(showStartScreen, displayTime);
 }
 
-document.addEventListener("keydown", generateGender);
+/**
+ * Shows start screen if it is hidden, generates gender otherwise
+ */
+function handleKeypress() {
+    if (startScreen.classList.contains("hidden")) {
+        showStartScreen();
+    } else {
+        generateGender();
+    }
+}
+
+// Timeout used to show start screen again after generating gender
+let startScreenTimeout;
+
+// Handle keypresses
+document.addEventListener("keypress", handleKeypress);
