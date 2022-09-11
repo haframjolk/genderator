@@ -4,7 +4,7 @@
 const backgroundColors = [
     "#E40303",
     "#FF8C00",
-    "#FFED00",
+    "#FFDC00",
     "#008026",
     "#004DFF",
     "#750787"
