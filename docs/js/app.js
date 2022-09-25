@@ -50,8 +50,8 @@ let startScreenTimeout;
 
 /**
  * Generates a random integer between min and max
- * @param {number} min Minimum number (inclusive)
- * @param {number} max Maximum number (exclusive)
+ * @param {number} min Minimum value (inclusive)
+ * @param {number} max Maximum value (exclusive)
  * @returns A random integer in the range [min, max)
  */
 function randInt(min, max) {
