@@ -17,7 +17,9 @@ body {
     visibility: hidden;
 }
 
-.gender {
+.gender,
+.gender__graphics,
+.gender__words {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,9 +28,24 @@ body {
     overflow: hidden;
 }
 
+.gender__graphics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gender__words {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.gender__graphic_container,
+.gender__word_container {
+    position: relative;
+}
+
 .gender__graphic {
     position: absolute;
-    width: 300px;
+    width: min(100%, 300px);
 }
 
 .gender__word {

@@ -42,8 +42,8 @@ const displayTime = 60000;
 // DOM elements
 const startScreen = document.getElementById("start-screen");
 const genderView = document.getElementById("gender");
-const genderGraphics = document.querySelector("#gender-graphics").children;
-const genderWords = document.querySelector("#gender-words").children;
+const genderGraphics = document.querySelectorAll("#gender-graphics img");
+const genderWords = document.querySelectorAll("#gender-words span");
 
 /**
  * Generates a random integer between min and max
@@ -65,17 +65,14 @@ function randomChoice(array) {
 }
 
 /**
- * Generates a random position for an object, with the specified margin
- * @param {number} margin Minimum margin from screen border
- * @param {number} width Screen width
- * @param {number} height Screen height
- * @returns An object with random values for the left and top position of an object
+ * Generates a random percentage position for an object
+ * @returns An object with random values between 0 and 100 for the left and top positions of an object
  */
-function generatePosition(margin, width, height) {
+function generatePercentPosition() {
     return {
-        left: randInt(margin, width - margin),
-        top: randInt(margin, height - margin),
-    }
+        left: randInt(0, 100),
+        top: randInt(0, 100)
+    };
 }
 
 /**
@@ -126,13 +123,9 @@ function generateGender() {
         genderGraphic.src = src;
 
         // Set graphic position
-        const screenFraction = Math.floor(window.innerWidth / genderGraphics.length);
-        const graphicPos = generatePosition(imgWidth, screenFraction, window.innerHeight);
-        genderGraphic.style.left = `${graphicPos.left + i * screenFraction}px`;
-        genderGraphic.style.top = `${graphicPos.top}px`;
-
-        // Increment i for next fraction
-        i++;
+        const graphicPos = generatePercentPosition();
+        genderGraphic.style.left = `max(0px, ${graphicPos.left}% - ${imgWidth}px)`;
+        genderGraphic.style.top = `max(0px, ${graphicPos.top}% - ${imgWidth}px)`;
     }
 
     // Words
@@ -153,14 +146,9 @@ function generateGender() {
         genderWord.textContent = randomChoice(words);
 
         // Set word position
-        // TODO: fix words sometimes appearing off-screen
-        const screenFraction = Math.floor(window.innerHeight / genderWords.length);
-        const wordPos = generatePosition(imgWidth, window.innerWidth, screenFraction);
-        genderWord.style.left = `${wordPos.left}px`;
-        genderWord.style.top = `${wordPos.top + j * screenFraction}px`;
-
-        // Increment i for next fraction
-        j++;
+        const wordPos = generatePercentPosition();
+        genderWord.style.left = `max(0px, ${wordPos.left}% - ${imgWidth}px)`;
+        genderWord.style.top = `max(0px, ${wordPos.top}% - ${imgWidth}px)`;
     }
 
     // TODO: fix this for multiple graphics
