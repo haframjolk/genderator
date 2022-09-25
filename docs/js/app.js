@@ -30,10 +30,18 @@ const images = [
     "img/16.png"
 ];
 
+// Preload images
+const imgElements = [];
+for (const src of images) {
+    const image = new Image();
+    image.src = src;
+    imgElements.push(image);
+}
+
 // Words to use
 const words = ["kosmós", "kaos", "alsæla", "já", "nei", "úff", "???", "!!!", "UwU", "aha!", "öööö", "heimurinn", "leið", "farartæki", "algrími", "alkuldi", "varmi", "dagbók", "augu", "nef", "munnur", "líkami", "fyndið", "sniðugt", "kort", "landslag", "blóm", "líf", "dauði", "gleði", "sorg", "OwO", "haaaaa", "þvættingur", "skilningur", "hraði", "kósí", "list", "ljóð", "fjöll", "sjór", "lækur", "skýin", "sól", "tungl", "fluga", "snigill", "manneskja", "einmitt", "taugar", "rætur", "flækja", "lauf", "skógur", "tígull", "stjarna", "hendur", "stjórn", "stjórnleysi", "jafnvægi", "óskilamunur", "fylgja", "skuggi", "ljós", "eitt", "pláneta", "heimur", "vídd", "tími", "lengd", "rými", "regnbogi", "veður", "hreinsun", "engill", "púki", "efni", "tómið", "tölva", "atóm", "stemming", "stuð", "þrumur", "morgun", "texti", "hljóð", "þögn", "læti", "vatn", "loft", "eldur"]
 
-// Width of images displayed in CSS pixels
+// Width of images displayed in CSS pixels, used for calculating margins
 const imgWidth = 300;
 
 // Time to display gender on screen in ms
@@ -44,6 +52,9 @@ const startScreen = document.getElementById("start-screen");
 const genderView = document.getElementById("gender");
 const genderGraphics = document.querySelectorAll("#gender-graphics img");
 const genderWords = document.querySelectorAll("#gender-words span");
+
+// Timeout used to show start screen again after generating gender
+let startScreenTimeout;
 
 /**
  * Generates a random integer between min and max
@@ -79,12 +90,11 @@ function generatePercentPosition() {
  * Hides the start screen
  */
 function hideStartScreen() {
-    // Remove event listener added after pressing button
-    // TODO: fix
-    // genderGraphic.removeEventListener("load", hideStartScreen);
-
     // Hide start screen
     startScreen.classList.add("hidden");
+
+    // Show the start screen if gender has been on screen for specified displayTime
+    startScreenTimeout = setTimeout(showStartScreen, displayTime);
 }
 
 /**
@@ -151,13 +161,8 @@ function generateGender() {
         genderWord.style.top = `max(0px, ${wordPos.top}% - ${imgWidth}px)`;
     }
 
-    // TODO: fix this for multiple graphics
-    // Once the graphic has been loaded, hide the start screen
-    // genderGraphic.addEventListener("load", hideStartScreen);
+    // Hide the start screen
     hideStartScreen();
-
-    // Show the start screen if gender has been on screen for specified displayTime
-    startScreenTimeout = setTimeout(showStartScreen, displayTime);
 }
 
 /**
@@ -170,9 +175,6 @@ function handleKeypress() {
         generateGender();
     }
 }
-
-// Timeout used to show start screen again after generating gender
-let startScreenTimeout;
 
 // Handle keypresses
 document.addEventListener("keypress", handleKeypress);
