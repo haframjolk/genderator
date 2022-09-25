@@ -30,14 +30,6 @@ const images = [
     "img/16.png"
 ];
 
-// Preload images
-const imgElements = [];
-for (const src of images) {
-    const image = new Image();
-    image.src = src;
-    imgElements.push(image);
-}
-
 // Words to use
 const words = ["kosmós", "kaos", "alsæla", "já", "nei", "úff", "???", "!!!", "UwU", "aha!", "öööö", "heimurinn", "leið", "farartæki", "algrími", "alkuldi", "varmi", "dagbók", "augu", "nef", "munnur", "líkami", "fyndið", "sniðugt", "kort", "landslag", "blóm", "líf", "dauði", "gleði", "sorg", "OwO", "haaaaa", "þvættingur", "skilningur", "hraði", "kósí", "list", "ljóð", "fjöll", "sjór", "lækur", "skýin", "sól", "tungl", "fluga", "snigill", "manneskja", "einmitt", "taugar", "rætur", "flækja", "lauf", "skógur", "tígull", "stjarna", "hendur", "stjórn", "stjórnleysi", "jafnvægi", "óskilamunur", "fylgja", "skuggi", "ljós", "eitt", "pláneta", "heimur", "vídd", "tími", "lengd", "rými", "regnbogi", "veður", "hreinsun", "engill", "púki", "efni", "tómið", "tölva", "atóm", "stemming", "stuð", "þrumur", "morgun", "texti", "hljóð", "þögn", "læti", "vatn", "loft", "eldur"]
 
@@ -174,6 +166,14 @@ function handleKeypress() {
     } else {
         generateGender();
     }
+}
+
+// Preload images
+const imgElements = [];
+for (const src of images) {
+    const image = new Image();
+    image.src = src;
+    imgElements.push(image);
 }
 
 // Handle keypresses
