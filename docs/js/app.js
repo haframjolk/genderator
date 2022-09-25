@@ -169,12 +169,11 @@ function handleKeypress() {
 }
 
 // Preload images
-const imgElements = [];
-for (const src of images) {
+const imgElements = images.map((src => {
     const image = new Image();
     image.src = src;
-    imgElements.push(image);
-}
+    return image;
+}));
 
 // Handle keypresses
 document.addEventListener("keypress", handleKeypress);
