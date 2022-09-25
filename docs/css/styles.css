@@ -44,12 +44,12 @@ body {
 }
 
 .gender__graphic {
-    position: absolute;
+    position: relative;
     width: min(100%, 300px);
 }
 
 .gender__word {
-    position: absolute;
+    position: relative;
     font-size: 3em;
 }
 
