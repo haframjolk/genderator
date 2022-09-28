@@ -10,25 +10,14 @@ const backgroundColors = [
     "#750787"
 ];
 
+// Number of images
+const noOfImages = 29;
+
 // Image source URLs
-const images = [
-    "img/1.png",
-    "img/2.png",
-    "img/3.png",
-    "img/4.png",
-    "img/5.png",
-    "img/6.png",
-    "img/7.png",
-    "img/8.png",
-    "img/9.png",
-    "img/10.png",
-    "img/11.png",
-    "img/12.png",
-    "img/13.png",
-    "img/14.png",
-    "img/15.png",
-    "img/16.png"
-];
+const images = [];
+for (let i = 1; i <= noOfImages; i++) {
+    images.push(`img/${i}.png`);
+}
 
 // Words to use
 const words = ["kosmós", "kaos", "alsæla", "já", "nei", "úff", "???", "!!!", "UwU", "aha!", "öööö", "heimurinn", "leið", "farartæki", "algrími", "alkuldi", "varmi", "dagbók", "augu", "nef", "munnur", "líkami", "fyndið", "sniðugt", "kort", "landslag", "blóm", "líf", "dauði", "gleði", "sorg", "OwO", "haaaaa", "þvættingur", "skilningur", "hraði", "kósí", "list", "ljóð", "fjöll", "sjór", "lækur", "skýin", "sól", "tungl", "fluga", "snigill", "manneskja", "einmitt", "taugar", "rætur", "flækja", "lauf", "skógur", "tígull", "stjarna", "hendur", "stjórn", "stjórnleysi", "jafnvægi", "óskilamunur", "fylgja", "skuggi", "ljós", "eitt", "pláneta", "heimur", "vídd", "tími", "lengd", "rými", "regnbogi", "veður", "hreinsun", "engill", "púki", "efni", "tómið", "tölva", "atóm", "stemming", "stuð", "þrumur", "morgun", "texti", "hljóð", "þögn", "læti", "vatn", "loft", "eldur"]
