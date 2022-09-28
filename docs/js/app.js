@@ -98,8 +98,6 @@ function generateGender() {
     
     // Graphics
     const usedGraphics = [];
-    // Iterator
-    let i = 0;
     for (const genderGraphic of genderGraphics) {
         // Choose a random graphic that has not been used before in this gender
         let src;
@@ -121,8 +119,6 @@ function generateGender() {
 
     // Words
     const usedWords = [];
-    // Iterator
-    let j = 0;
     for (const genderWord of genderWords) {
         // Choose a random word that has not been used before in this gender
         let word;
